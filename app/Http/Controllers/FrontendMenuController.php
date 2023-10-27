@@ -37,6 +37,7 @@ class FrontendMenuController extends Controller
 
     public function myUpdate(Request $request)
     {
+
         $user = Customer::where('id',Auth::guard('customer')->user()->id)
                         ->first();
         $user->update([

@@ -17,7 +17,7 @@
             </div>
             <div class="flex flex-col">
                 <label for="">Number</label>
-                <input type="tel" v-model="data.number" class="p-3 bg-gray-200" placeholder="092313***">
+                <input type="tel"  v-model="data.number" class="p-3 bg-gray-200" placeholder="092313***">
                 <small v-if="errors.number" class="text-red-500 text-base" >{{ errors.number[0] }}</small>
             </div>
             <div class="flex flex-col">

@@ -10,7 +10,7 @@
         <li>
             <a href="/admin/customers" class="p-2 text-base w-full gap-2 items-center text-gray-800 rounded hover:font-bold hover:opacity-100 tracking-wider flex font-inter {{ request()->is('admin/customers') ? ' text-gray-700  font-bold' : 'opacity-60'}}"  ><img src="{{asset('svg/customers.svg')}}" alt=""> Customers</a>
         </li>
-        <li>
+        {{-- <li>
             <a onclick="employee()" class="p-2 cursor-pointer relative text-base w-full flex gap-2 text-gray-700 rounded  tracking-wider  hover:opacity-100 hover:font-bold font-inter {{ request()->is('admin/employees') || request()->is('admin/attendance')  || request()->is('admin/employee/attendance') ? ' opacity-100 font-bold' : 'opacity-60 '}}" ><img src="{{asset('svg/employee.svg')}}" alt=""> Employee<i class="fa-solid fa-caret-down absolute right-0 top-[28%] bottom-0 "></i>
             </a>
             <ul id="employeeDropdown" class="px-4  bg-gray-200 {{ request()->is('admin/employees') || request()->is('admin/attendance') || request()->is('admin/employee/type') || request()->is('admin/employee/attendance') ? '' : ' hidden'}}">
@@ -29,11 +29,11 @@
 
 
             </ul>
-        </li>
-        <li>
+        </li> --}}
+        {{-- <li>
             <a href="/admin/event" class="p-2 text-base w-full gap-2 items-center text-gray-800 rounded hover:font-bold hover:opacity-100 tracking-wider flex font-inter {{ request()->is('admin/event') ? ' text-gray-700  font-bold' : 'opacity-60'}}"  ><img src="{{asset('svg/event.svg')}}" class="max-w-[20px] max-h-[20px]" alt=""> Event</a>
-        </li>
-        <li>
+        </li> --}}
+        {{-- <li>
             <a onclick="inventory()" class="p-2 cursor-pointer relative text-base w-full flex gap-2 text-gray-700 rounded hover:font-bold tracking-wider hover:opacity-100 font-inter {{ request()->is('admin/inventory/calasiao') || request()->is('admin/inventory/dagupan') || request()->is('admin/inventory/lingayen') || request()->is('admin/inventory/category') ? 'font-bold' : ' opacity-60'}}" ><img src="{{asset('svg/inventory.svg')}}" alt=""> Inventory<i class="fa-solid fa-caret-down absolute right-0 top-[28%] bottom-0 "></i>
             </a>
             <ul id="inventoryDropdown" class="px-4  bg-gray-200 {{ request()->is('admin/inventory/calasiao') || request()->is('admin/inventory/dagupan') || request()->is('admin/inventory/lingayen') || request()->is('admin/inventory/category') ? '' : ' hidden'}}">
@@ -55,7 +55,7 @@
 
 
             </ul>
-        </li>
+        </li> --}}
         <li>
             <a onclick="menu()" class="p-2 cursor-pointer relative text-base w-full flex gap-2 text-gray-700 rounded hover:font-bold tracking-wider hover:opacity-100 {{ request()->is('admin/menu/category') || request()->is('admin/menu') ? ' opacity-100 font-bold' : 'opacity-60 '}} font-inter" ><img src="{{asset('svg/res_menu.svg')}}" alt=""> Menu<i class="fa-solid fa-caret-down absolute right-0 top-[28%] bottom-0 "></i>
             </a>

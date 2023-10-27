@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <label class="font-inter">Number</label>
-                    <input type="text" v-model="data.number" class="bg-gray-200 font-inter px-4 py-2 w-full inline-block rounded"
+                    <input type="number" pattern="^[09]\d{10,10}$" v-model="data.number" class="bg-gray-200 font-inter px-4 py-2 w-full inline-block rounded"
                         placeholder="Golden Mami ewqe" min="11">
                 </div>
                 <div>

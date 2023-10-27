@@ -18,14 +18,14 @@
                 </div>
                 <div class="flex flex-col">
                     <label for="">Phone Number</label>
-                    <input type="tel" v-model="data.phone_number" class="p-3 bg-gray-200 w-full inline-block" :class="errors.phone_number ? 'border-2 border-red-400' : ''" placeholder="091023213****">
+                    <input type="tel" pattern="^[09]\d{10,10}$" v-model="data.phone_number" class="p-3 bg-gray-200 w-full inline-block" :class="errors.phone_number ? 'border-2 border-red-400' : ''" placeholder="091023213****">
                 </div>
 
             </div>
             <div class="grid grid-cols-1 gap-4 p-3 w-full">
                 <div class="flex flex-col">
                     <label for="">Guest</label>
-                    <input type="number" v-model="data.guest" class="p-3 bg-gray-200 w-full inline-block" :class="errors.guest ? 'border-2 border-red-400' : ''" placeholder="1">
+                    <input type="number"  v-model="data.guest" class="p-3 bg-gray-200 w-full inline-block" :class="errors.guest ? 'border-2 border-red-400' : ''" placeholder="1">
                 </div>
                 <div class="flex flex-col">
                     <label for="">Branch</label>
@@ -91,13 +91,16 @@
                     <button v-else  type="submit"  class="bg-[#ebb700] p-3 text-gray-100 font-sans font-semibold w-full"><i class="fa-solid fa-spinner animate-spin"></i></button>
                 </div>
             </div>
+            <VueDatePicker v-model="date" :min-date="new Date()" date-picker  hide-navigation="['time', 'year']" :disabled-dates="['2023-10-28', '2023-10-30',]"></VueDatePicker>
         </form>
 
 </template>
 <script setup>
-import { reactive, ref } from 'vue';
-
+import { reactive, ref ,onMounted } from 'vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 const errors = ref([]);
+
 const data = reactive({
     time:'',
     date:'',
@@ -133,5 +136,8 @@ const add = async () =>{
 
    }
 }
+onMounted(() => {
+    data.guest = 1;
+});
 </script>
 

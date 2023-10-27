@@ -39,8 +39,8 @@ class AuthController extends Controller
     {
         $request->validate([
             'nickname'=>'required',
-            'email'=>'required|unique:customers',
-            'number'=>'required|min:11|max:11',
+            'email'=>'required|unique:customers|email',
+            'number'=>'required|digits:11|regex:/(0)[09]/|numeric',
             'password'=>'required|min:8',
         ]);
         $create = Customer::create([

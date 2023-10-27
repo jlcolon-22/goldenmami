@@ -21,7 +21,7 @@ class ReservationController extends Controller
             'date'=>'required',
             'order'=>'required',
             'guest'=>'required',
-            'phone_number'=>'required',
+            'phone_number'=>'required|min:11|max:11|regex:/(0)[09]/|numeric',
             'branch'=>'required',
         ]);
 

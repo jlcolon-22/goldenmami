@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\ADMIN;
 
-use Validator;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -29,12 +29,13 @@ class CustomerController extends Controller
 
           $rules = [
             'nickname'=>'required',
-            'email'=>'required|unique:customers',
-            'number'=>'required|min:11|max:12',
+            'email'=>'required|unique:customers|email',
+            'number'=>'required|numeric|digits:11||regex:/(0)[09]/|',
             'address'=>'required',
             'email_validate'=>'required',
             'password'=>'required|min:8',
           ];
+
           $validator = Validator::make($y,$rules);
           if($validator->fails()) {
               return response()->json(['errors'=>$validator->errors()], 422);

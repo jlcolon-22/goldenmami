@@ -94,7 +94,7 @@
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label>Phone Number</label>
-                                <input type="tel" v-model="data.number"
+                                <input type="number"  v-model="data.number"
                                     class="py-2 px-4 bg-gray-200 rounded w-full inline-block font-inter"
                                     placeholder="092102313**">
                                 <small v-if="errors.number" class="text-red-600 font-inter">{{ errors.number[0] }}</small>

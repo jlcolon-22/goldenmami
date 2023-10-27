@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         'name' => 'admin',
         'email' => 'admin@gmail.com',
         'email_verified_at' => now(),
-        'password' => Hash::make('@Goldenmami2023'), // password
+    'password' => Hash::make('@Goldenmami2023'), // password
         'remember_token' => Str::random(10),
        ]);
     //    EmployeeType::create([

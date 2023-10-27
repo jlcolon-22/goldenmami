@@ -31,7 +31,7 @@
                             </th>
 
                             <th scope="col" class="px-6 py-3  font-inter">
-                                Tools
+                                Action
                             </th>
                         </tr>
                     </thead>

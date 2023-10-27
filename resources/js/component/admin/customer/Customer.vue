@@ -70,9 +70,10 @@
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                             <label>Number</label>
-                            <input type="text" v-model="data.number"
+
+                            <input type="tel"  v-model="data.number"
                                 class="py-2 px-4 bg-gray-200 rounded w-full inline-block font-inter"
-                                placeholder="example@gmail.com">
+                                placeholder="09101421***"  >
                             <small v-if="errors.number" class="text-red-600 font-inter">{{ errors.number[0] }}</small>
                         </div>
                         <div>
@@ -141,7 +142,7 @@
                             NUMBER
                         </th>
                         <th scope="col" class="px-6 py-3  font-inter">
-                            Tools
+                            ACTION
                         </th>
                     </tr>
                 </thead>
@@ -251,6 +252,7 @@ const add = async () => {
 
     if(updateButton.value)
     {
+
         let formData = new FormData();
         formData.append('details', JSON.stringify(data));
         formData.append('photo', data.photo);
@@ -265,7 +267,7 @@ const add = async () => {
         addButton();
         fetch();
     }else{
-
+        console.log(data)
         try {
             let formData = new FormData();
         formData.append('details', JSON.stringify(data));
