@@ -27862,6 +27862,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var __expose = _ref.expose;
     __expose();
     var errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var datx = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(datx, function (n, o) {
+      console.log(n);
+    });
+    var startTime = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
+      hours: 10,
+      minutes: 30
+    });
     var data = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       time: '',
       date: '',
@@ -27915,6 +27923,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     });
     var __returned__ = {
       errors: errors,
+      datx: datx,
+      startTime: startTime,
       data: data,
       loading: loading,
       props: props,
@@ -27922,6 +27932,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
       get VueDatePicker() {
         return _vuepic_vue_datepicker__WEBPACK_IMPORTED_MODULE_1__["default"];
       }
@@ -32978,21 +32989,36 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.add, ["prevent"]),
     "class": "bg-[#f8f8f8] w-full md:w-[80%] max-w-[100%] mx-auto rounded shadow p-3"
-  }, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "time",
+  }, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input type=\"time\" v-model=\"data.time\" class=\"p-3 bg-gray-200 w-full inline-block\" :class=\"errors.time ? 'border-2 border-red-400' : ''\" placeholder=\"time\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatePicker"], {
+    "input-class-name": "date_style",
+    "start-time": $setup.startTime,
+    modelValue: $setup.data.time,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.data.time = $event;
     }),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-3 bg-gray-200 w-full inline-block", $setup.errors.time ? 'border-2 border-red-400' : '']),
-    placeholder: "time"
-  }, null, 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.data.time]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "date",
+    "min-time": {
+      hours: 10,
+      minutes: 30
+    },
+    "time-picker": "",
+    "max-time": {
+      hours: 21,
+      minutes: 0
+    },
+    placeholder: "Select time"
+  }, null, 8 /* PROPS */, ["start-time", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input type=\"date\" v-model=\"data.date\" class=\"p-3 bg-gray-200 w-full inline-block\" :class=\"errors.date ? 'border-2 border-red-400' : ''\" placeholder=\"example@gmail.com\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatePicker"], {
+    "input-class-name": "date_style",
+    modelValue: $setup.data.date,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.data.date = $event;
     }),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-3 bg-gray-200 w-full inline-block", $setup.errors.date ? 'border-2 border-red-400' : '']),
-    placeholder: "example@gmail.com"
-  }, null, 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.data.date]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "min-date": new Date(),
+    "date-picker": "",
+    "enable-time-picker": false,
+    "hide-navigation": "['time', '']",
+    "disabled-dates": ['2023-10-28', '2023-10-30'],
+    placeholder: "Select Date"
+  }, null, 8 /* PROPS */, ["modelValue", "min-date"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "tel",
     pattern: "^[09]\\d{10,10}$",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -33017,16 +33043,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.data.order = $event;
     }),
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-3 bg-gray-200 w-full inline-block", $setup.errors.order ? 'border-2 border-red-400' : ''])
-  }, [].concat(_hoisted_26), 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.data.order]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"grid grid-cols-2 gap-10 p-3\">\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Time</label>\n                    <input type=\"time\" v-model=\"data.time\" class=\"p-3 bg-gray-200\" :class=\"errors.time ? 'border-2 border-red-400' : ''\" placeholder=\"time\">\n                </div>\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Date</label>\n                    <input type=\"date\" v-model=\"data.date\" class=\"p-3 bg-gray-200\" :class=\"errors.date ? 'border-2 border-red-400' : ''\" placeholder=\"example@gmail.com\">\n                </div>\n            </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"grid grid-cols-2 gap-10 p-3\">\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Phone Number</label>\n                    <input type=\"tel\" v-model=\"data.phone_number\" class=\"p-3 bg-gray-200\" :class=\"errors.phone_number ? 'border-2 border-red-400' : ''\" placeholder=\"091023213****\">\n                </div>\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Guest</label>\n                    <input type=\"number\" v-model=\"data.guest\" class=\"p-3 bg-gray-200\" :class=\"errors.guest ? 'border-2 border-red-400' : ''\" placeholder=\"1\">\n                </div>\n            </div>\n            <div class=\"grid grid-cols-2 gap-10 p-3\">\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Branch</label>\n                    <select v-model=\"data.branch\"  class=\"p-3 bg-gray-200\" :class=\"errors.branch ? 'border-2 border-red-400' : ''\">\n                        <option value=\"\">Choose...</option>\n                        <option value=\"1\">Calasioa</option>\n                        <option value=\"2\">Dagupan</option>\n                        <option value=\"3\">Lingayen</option>\n                    </select>\n                </div>\n                <div class=\"flex flex-col\">\n                    <label for=\"\">My Order</label>\n                    <select v-model=\"data.order\" class=\"p-3 bg-gray-200\" :class=\"errors.order ? 'border-2 border-red-400' : ''\">\n                        <option value=\"\">Choose...</option>\n                        <option value=\"1\">All in my cart</option>\n                    </select>\n                </div>\n            </div>\n             "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [$setup.props.auth == '0' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_28, "Make a Reservation")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [!$setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_30, "Make a Reservation")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_31, [].concat(_hoisted_33)))]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatePicker"], {
-    modelValue: _ctx.date,
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return _ctx.date = $event;
-    }),
-    "min-date": new Date(),
-    "date-picker": "",
-    "hide-navigation": "['time', 'year']",
-    "disabled-dates": ['2023-10-28', '2023-10-30']
-  }, null, 8 /* PROPS */, ["modelValue", "min-date"])], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
+  }, [].concat(_hoisted_26), 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.data.order]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"grid grid-cols-2 gap-10 p-3\">\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Time</label>\n                    <input type=\"time\" v-model=\"data.time\" class=\"p-3 bg-gray-200\" :class=\"errors.time ? 'border-2 border-red-400' : ''\" placeholder=\"time\">\n                </div>\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Date</label>\n                    <input type=\"date\" v-model=\"data.date\" class=\"p-3 bg-gray-200\" :class=\"errors.date ? 'border-2 border-red-400' : ''\" placeholder=\"example@gmail.com\">\n                </div>\n            </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"grid grid-cols-2 gap-10 p-3\">\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Phone Number</label>\n                    <input type=\"tel\" v-model=\"data.phone_number\" class=\"p-3 bg-gray-200\" :class=\"errors.phone_number ? 'border-2 border-red-400' : ''\" placeholder=\"091023213****\">\n                </div>\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Guest</label>\n                    <input type=\"number\" v-model=\"data.guest\" class=\"p-3 bg-gray-200\" :class=\"errors.guest ? 'border-2 border-red-400' : ''\" placeholder=\"1\">\n                </div>\n            </div>\n            <div class=\"grid grid-cols-2 gap-10 p-3\">\n                <div class=\"flex flex-col\">\n                    <label for=\"\">Branch</label>\n                    <select v-model=\"data.branch\"  class=\"p-3 bg-gray-200\" :class=\"errors.branch ? 'border-2 border-red-400' : ''\">\n                        <option value=\"\">Choose...</option>\n                        <option value=\"1\">Calasioa</option>\n                        <option value=\"2\">Dagupan</option>\n                        <option value=\"3\">Lingayen</option>\n                    </select>\n                </div>\n                <div class=\"flex flex-col\">\n                    <label for=\"\">My Order</label>\n                    <select v-model=\"data.order\" class=\"p-3 bg-gray-200\" :class=\"errors.order ? 'border-2 border-red-400' : ''\">\n                        <option value=\"\">Choose...</option>\n                        <option value=\"1\">All in my cart</option>\n                    </select>\n                </div>\n            </div>\n             "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [$setup.props.auth == '0' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_28, "Make a Reservation")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [!$setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_30, "Make a Reservation")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_31, [].concat(_hoisted_33)))]))])], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
 }
 
 /***/ }),
@@ -35520,6 +35537,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.catContainer::-webkit-scrollbar {\n    display: block;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.date_style{\n    background-color:rgb(229 231 235) !important;\n    color: black !important;\n    padding: 12px 0px 12px 40px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -63240,6 +63281,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Reservation_vue_vue_type_style_index_0_id_149592c1_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Reservation_vue_vue_type_style_index_0_id_149592c1_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Reservation_vue_vue_type_style_index_0_id_149592c1_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -69308,13 +69379,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Reservation_vue_vue_type_template_id_149592c1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Reservation.vue?vue&type=template&id=149592c1 */ "./resources/js/component/pages/Reservation.vue?vue&type=template&id=149592c1");
 /* harmony import */ var _Reservation_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Reservation.vue?vue&type=script&setup=true&lang=js */ "./resources/js/component/pages/Reservation.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Reservation_vue_vue_type_style_index_0_id_149592c1_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css */ "./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Reservation_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Reservation_vue_vue_type_template_id_149592c1__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/pages/Reservation.vue"]])
+
+
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_Reservation_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Reservation_vue_vue_type_template_id_149592c1__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/component/pages/Reservation.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -70208,6 +70282,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Menu_vue_vue_type_style_index_0_id_f62e468c_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Menu.vue?vue&type=style&index=0&id=f62e468c&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Menu.vue?vue&type=style&index=0&id=f62e468c&lang=css");
+
+
+/***/ }),
+
+/***/ "./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Reservation_vue_vue_type_style_index_0_id_149592c1_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/component/pages/Reservation.vue?vue&type=style&index=0&id=149592c1&lang=css");
 
 
 /***/ }),

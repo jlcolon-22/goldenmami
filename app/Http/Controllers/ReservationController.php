@@ -15,13 +15,14 @@ class ReservationController extends Controller
 {
     public function store(Request $request)
     {
+
         $user = Auth::guard('customer')->user();
         $request->validate([
             'time'=>'required',
             'date'=>'required',
             'order'=>'required',
             'guest'=>'required',
-            'phone_number'=>'required|min:11|max:11|regex:/(0)[09]/|numeric',
+            'phone_number'=>'required|digits:11|regex:/(0)[09]/|numeric',
             'branch'=>'required',
         ]);
 
@@ -43,8 +44,8 @@ class ReservationController extends Controller
             return response()->json(['min amount'], 207);
         }
         $reserve = Reservation::create([
-            'time'=>$request->time,
-            'date'=>$request->date,
+            'time'=>$request->time['hours'].':'.$request->time['minutes'],
+            'date'=>explode('T',$request->date)[0],
             'number'=>$request->phone_number,
             'guest'=>$request->guest,
             'branch'=>$request->branch,

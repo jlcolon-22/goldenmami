@@ -10,11 +10,13 @@
                 <div class="grid grid-cols-1 gap-4 p-3  w-full">
                 <div class="flex flex-col">
                     <label for="">Time</label>
-                    <input type="time" v-model="data.time" class="p-3 bg-gray-200 w-full inline-block" :class="errors.time ? 'border-2 border-red-400' : ''" placeholder="time">
+                    <!-- <input type="time" v-model="data.time" class="p-3 bg-gray-200 w-full inline-block" :class="errors.time ? 'border-2 border-red-400' : ''" placeholder="time"> -->
+                    <VueDatePicker input-class-name="date_style" :start-time="startTime" v-model="data.time"  :min-time="{ hours: 10, minutes: 30 }" time-picker  :max-time="{ hours: 21, minutes: 0 }"  placeholder="Select time" ></VueDatePicker>
                 </div>
                 <div class="flex flex-col">
                     <label for="">Date</label>
-                    <input type="date" v-model="data.date" class="p-3 bg-gray-200 w-full inline-block" :class="errors.date ? 'border-2 border-red-400' : ''" placeholder="example@gmail.com">
+                    <!-- <input type="date" v-model="data.date" class="p-3 bg-gray-200 w-full inline-block" :class="errors.date ? 'border-2 border-red-400' : ''" placeholder="example@gmail.com"> -->
+                    <VueDatePicker input-class-name="date_style" v-model="data.date"  :min-date="new Date()" date-picker :enable-time-picker="false"  hide-navigation="['time', '']" :disabled-dates="['2023-10-28', '2023-10-30',]" placeholder="Select Date" ></VueDatePicker>
                 </div>
                 <div class="flex flex-col">
                     <label for="">Phone Number</label>
@@ -91,16 +93,21 @@
                     <button v-else  type="submit"  class="bg-[#ebb700] p-3 text-gray-100 font-sans font-semibold w-full"><i class="fa-solid fa-spinner animate-spin"></i></button>
                 </div>
             </div>
-            <VueDatePicker v-model="date" :min-date="new Date()" date-picker  hide-navigation="['time', 'year']" :disabled-dates="['2023-10-28', '2023-10-30',]"></VueDatePicker>
+
+
         </form>
 
 </template>
 <script setup>
-import { reactive, ref ,onMounted } from 'vue';
+import { reactive, ref ,onMounted,watch } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 const errors = ref([]);
-
+const datx = ref('');
+watch(datx,(n,o)=>{
+    console.log(n)
+})
+const startTime = ref({ hours: 10, minutes: 30 });
 const data = reactive({
     time:'',
     date:'',
@@ -140,4 +147,10 @@ onMounted(() => {
     data.guest = 1;
 });
 </script>
-
+<style >
+.date_style{
+    background-color:rgb(229 231 235) !important;
+    color: black !important;
+    padding: 12px 0px 12px 40px !important;
+}
+</style>
