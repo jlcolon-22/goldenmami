@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RestaurantInformation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ADMIN\AdminReservationController;
-
+use App\Http\Controllers\API\RefundController;
 
 Route::get('/send',[AdminReservationController::class,'send']);
 
@@ -34,9 +35,16 @@ Route::get('/faq',function()
     $info = RestaurantInformation::first();
     return view('pages.faq',compact('info'));
 });
-Route::get('/login',function()
+Route::get('/login',function(Request $request)
 {
     $info = RestaurantInformation::first();
+    $verified = true;
+    if ($request->session()->has('success')) {
+
+        $request->session()->forget('success');
+        $request->session()->flash('verified','true');
+
+    }
     return view('auth.login',compact('info'));
 });
 Route::get('/register',function()
@@ -44,7 +52,12 @@ Route::get('/register',function()
     $info = RestaurantInformation::first();
     return view('auth.register',compact('info'));
 });
-
+Route::get('/auth/success',function()
+{
+    $info = RestaurantInformation::first();
+    return view('auth.success',compact('info'));
+});
+Route::get('/auth/verify-email',[AuthController::class,'verify']);
 Route::view('my','pages.my');
 Route::view('reservation/list','pages.reservation_list');
 Route::get('logout',function(Request $request){
@@ -87,6 +100,8 @@ Route::middleware(['adminonly'])->prefix('admin')->group(function () {
         Auth::guard('web')->logout();
         return redirect('/login');
     });
+    // Refund
+    Route::get('refund-request',[RefundController::class, 'index']);
 });
 
 Route::prefix('employee')->group(function () {

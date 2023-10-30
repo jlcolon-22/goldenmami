@@ -21,13 +21,16 @@
                     <div>
                         <label class="font-inter">Email</label>
                         <input type="email" v-model="data.email" class="bg-gray-200 font-inter px-4 py-2 w-full inline-block rounded"
-                            placeholder="Golden Mami ewqe">
+                            placeholder="Email address">
                     </div>
                 </div>
-                <div>
+                <div class="relative">
                     <label class="font-inter">Number</label>
-                    <input type="number" pattern="^[09]\d{10,10}$" v-model="data.number" class="bg-gray-200 font-inter px-4 py-2 w-full inline-block rounded"
-                        placeholder="Golden Mami ewqe" min="11">
+                    <input type="tel" pattern="[0-9]{10}"  v-model="data.number" class="bg-gray-200 font-inter pr-4 pl-12 py-2 w-full inline-block rounded"
+                        placeholder="phone number"  maxlength="10">
+                        <div class="bg-gray-300 w-fit p-2 absolute top-6">
+                        +63
+                    </div>
                 </div>
                 <div>
                     <label class="font-inter">Address</label>

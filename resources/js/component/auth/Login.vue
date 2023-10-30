@@ -1,9 +1,15 @@
 <template>
     <form @submit.prevent="login" class="bg-[#f8f8f8] rounded shadow p-3" style="width: 500px;">
-        <p class="text-gray-800 text-4xl  font-serif">Sign In</p>
+        <p class="text-gray-800 text-4xl  font-serif">Sign In </p>
         <div class="grid grid-cols-1 gap-3 p-3">
             <div class="bg-red-300 p-3 text-red-600" v-if="wrongCredentials">
                 <strong>Wrong Credentials!</strong>
+            </div>
+            <div class="bg-green-300 p-3 text-green-600" v-if="flash == 's'">
+                <strong>Your email has been verified!</strong>
+            </div>
+            <div class="bg-yellow-300 p-3 text-yellow-600" v-if="verify_first">
+                <strong>you need to verify your email address!</strong>
             </div>
             <div class="flex flex-col">
                 <label for="">Email</label>
@@ -23,12 +29,16 @@
     </form>
 </template>
 <script setup>
-import {ref,reactive} from 'vue';
+import {ref,reactive,onMounted ,defineProps} from 'vue';
 const data = reactive({
     email:'',
     password:'',
 });
+const props = defineProps(['flash']);
+
+const verify_first = ref(false);
 const errors = ref([]);
+const success = ref(false);
 const loginLoading = ref(false);
 const wrongCredentials = ref(false);
 const login = async () =>{
@@ -48,6 +58,8 @@ const login = async () =>{
             localStorage.setItem('auth',true);
         }else if(res.status == 200){
             location.href = '/admin/dashboard';
+        }else if(res.status == 205){
+            verify_first.value = true;
         }
         errors.value = [];
         loginLoading.value = false;
@@ -57,5 +69,11 @@ const login = async () =>{
         loginLoading.value = false;
     })
 }
-
+onMounted(() => {
+   const href = window.location.href.split('?');
+   if(href.length == 2)
+   {
+        success.value = true;
+   }
+})
 </script>

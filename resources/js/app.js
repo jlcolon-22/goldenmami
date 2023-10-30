@@ -46,6 +46,9 @@ import Event from './component/admin/event/Event.vue';
 // reservation
 import admin_reservation from './component/admin/reservation/Reserve.vue'
 
+// refund
+import admin_refund from './component/admin/refund/Index.vue'
+
 // ######################## CUSTOMER #################################
 // Front end
 import Menus from './component/pages/Menu.vue';
@@ -83,6 +86,7 @@ app.component('inventory-category',inventoryCategory);
 app.component('customer-customers',customerCustomers);
 app.component('event-events',Event);
 app.component('admin-reservation',admin_reservation);
+app.component('admin-refund',admin_refund);
 
 
 app.component('employee-dashboard',employeeDashboard);

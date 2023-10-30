@@ -21,6 +21,7 @@ use App\Http\Controllers\ADMIN\InventoryDagupanController;
 use App\Http\Controllers\ADMIN\InventoryCalasiaoController;
 use App\Http\Controllers\ADMIN\InventoryCategoryController;
 use App\Http\Controllers\ADMIN\InventoryLingayenController;
+use App\Http\Controllers\API\RefundController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,10 @@ Route::middleware(['adminonly'])->prefix('admin')->group(function () {
     Route::post('reservation/approved/{id}',[AdminReservationController::class,'approved']);
     Route::delete('reservation/delete/{id}',[AdminReservationController::class,'destroy']);
     Route::get('reservation/search',[AdminReservationController::class,'search']);
+
+    // refund
+    Route::get('refund',[RefundController::class,'getRefund']);
+    Route::put('refund/update/{id}/{type}',[RefundController::class,'updated']);
 });
 
 Route::prefix('frontend')->group(function () {
@@ -147,6 +152,9 @@ Route::prefix('frontend')->group(function () {
 
     // contact
     Route::post('contact/add',[ContactController::class,'store']);
+
+    // refund
+    Route::post('/refund',[ReservationController::class,'refundStore']);
 });
 Route::prefix('employee')->group(function () {
     Route::get('events',[EventController::class,'all']);

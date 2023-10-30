@@ -30,7 +30,7 @@ class CustomerController extends Controller
           $rules = [
             'nickname'=>'required',
             'email'=>'required|unique:customers|email',
-            'number'=>'required|numeric|digits:11||regex:/(0)[09]/|',
+            'number'=>'required|numeric|digits:10',
             'address'=>'required',
             'email_validate'=>'required',
             'password'=>'required|min:8',

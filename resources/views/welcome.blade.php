@@ -127,14 +127,18 @@
         </section> --}}
         {{-- menu --}}
         <home-frontend auth="{{Auth::guard('customer')->check() ? '1' : '0'}}"></home-frontend>
-
+        <section>
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.2268499293796!2d120.33237707439051!3d16.039311140239644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33915d57333cdcbb%3A0xcf0c8ca31ac88975!2sGolden%20Mami%20House!5e1!3m2!1sen!2sph!4v1698584151210!5m2!1sen!2sph" class="w-full h-[400px]" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
         {{-- footer --}}
         <footer class="bg-[#121212] p-3 text-center">
             <p class="text-gray-100">2023.Golden Mami.All rights reserved</p>
+
         </footer>
     </div>
 @endsection
 @section('scripts')
+
     @if(Auth::guard('customer')->check())
     <script>
         localStorage.setItem('auth',true)

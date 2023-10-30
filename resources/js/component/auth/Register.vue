@@ -15,9 +15,12 @@
                 <input type="email" v-model="data.email" class="p-3 bg-gray-200" placeholder="example@gmail.com">
                 <small v-if="errors.email" class="text-red-500 text-base" >{{ errors.email[0] }}</small>
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col relative">
                 <label for="">Number</label>
-                <input type="tel"  v-model="data.number" class="p-3 bg-gray-200" placeholder="092313***">
+                <input type="number"  v-model="data.number" class="py-3 pr-3 pl-14 bg-gray-200" placeholder="92313***">
+                <div class="bg-gray-300 w-fit p-3 absolute top-6">
+                        +63
+                    </div>
                 <small v-if="errors.number" class="text-red-500 text-base" >{{ errors.number[0] }}</small>
             </div>
             <div class="flex flex-col">
@@ -49,7 +52,7 @@ const login = async () =>{
       const res = await axios.post('/api/auth/register',data)
 
 
-            location.href = '/';
+            location.href = '/auth/success';
 
         errors.value = [];
         loginLoading.value = false;

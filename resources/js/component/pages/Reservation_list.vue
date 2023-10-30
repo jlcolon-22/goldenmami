@@ -2,7 +2,10 @@
     <div
         class="bg-[#f8f8f8] flex justify-start flex-col items-start rounded shadow max-w-[100%] mx-auto overflow-x-auto p-3"
     >
-        <h1 class="text-2xl font-inter text-gray-700 py-3">Reservation List</h1>
+        <div class="flex justify-between items-center w-full">
+            <h1 class="text-2xl font-inter text-gray-700 py-3">Reservation List</h1>
+        <button class="bg-blue-600 py-2 px-6 text-white rounded" @click="refundModal = true" >Refund</button>
+        </div>
         <table class="w-full text-sm text-left text-gray-500 z-0">
             <thead class="text-xs text-gray-50 uppercase bg-[#ebb700]">
                 <tr>
@@ -15,7 +18,7 @@
                         PAYMENT STATUS
                     </th>
                     <th scope="col" class="px-6 py-3 font-inter">BRANCH</th>
-                    <th scope="col" class="px-6 py-3 font-inter">Tools</th>
+                    <th scope="col" class="px-6 py-3 font-inter">ACTION</th>
                 </tr>
             </thead>
             <tbody>
@@ -255,17 +258,65 @@
             </div>
         </div>
     </div>
+
+
+<!-- Main modal -->
+<div v-if="refundModal == true" id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[#0004] flex justify-center pt-20">
+    <div class="relative w-full max-w-2xl max-h-full ">
+        <!-- Modal content -->
+        <form @submit.prevent="submitRefund" class="relative bg-white rounded-lg shadow  ">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 border-b rounded-t ">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Refund
+                </h3>
+                <button type="button" @click="refundModal = false" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="static-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <div>
+                    <label for="">Receipt </label>
+                    <br>
+                    <input type="file" required @change="uploadFile" class="p-2 bg-gray-200 w-full">
+                </div>
+                <div>
+                    <label for="">Reason</label>
+                    <br>
+                    <textarea v-model="refundData.reason" required class="p-2 bg-gray-200 w-full" cols="30" rows="2" placeholder="reasons..."></textarea>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+                <button v-if="loadingRefund == false" data-modal-hide="static-modal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                <button v-else data-modal-hide="static-modal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center opacity-60" disabled="true">Loading...</button>
+                <button  @click="refundModal = false" data-modal-hide="static-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"> Close</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
+import Swal from 'sweetalert2'
 import Paginate from "vuejs-paginate-next";
 const viewModal = ref(false);
+const refundModal = ref(false);
 const allData = ref([]);
 const page = ref(1);
 const pageCount = ref(0);
 const perPage = ref(null);
 const viewData = ref([]);
-
+const loadingRefund = ref(false)
+const refundData = reactive({
+    file:'',
+    reason:''
+})
 const fetch = async (pageNum) => {
     try {
         const res = await axios.get(
@@ -328,6 +379,32 @@ function convertDate(dt) {
     const monthName = months[monthIndex];
 
     return monthName + " " + date + " " + year;
+}
+const uploadFile = (e) =>{
+    refundData.file = e.target.files[0];
+}
+const submitRefund = async () =>{
+    loadingRefund.value = true;
+    try {
+        var formData = new FormData();
+        formData.append('receipt',refundData.file);
+        formData.append('reason',refundData.reason);
+        await axios.post('/api/frontend/refund',formData);
+        refundData.file = '';
+        refundData.reason = '';
+        loadingRefund.value = false;
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Submited Successfully!',
+            showConfirmButton: false,
+            timer: 2500
+        })
+
+    } catch (error) {
+
+    }
+
 }
 onMounted(() => {
     fetch();

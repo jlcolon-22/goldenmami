@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 
+
 @section('content')
     <div class="relative w-screen overflow-hidden">
         {{-- First --}}
@@ -13,10 +14,8 @@
                             <i class="fa-solid fa-phone-volume"></i>
                             @empty($info->res_number)
                                 +63 932 724 9680
-
                             @else
                                 +{{ $info->res_number }}
-
                             @endempty
                         </p>
                         <p class="text-sm lg:text-base text-end flex items-center gap-1 justify-end lg:justify-center">
@@ -58,14 +57,15 @@
         </div>
         <section class="flex justify-center flex-col items-center w-full pt-16 pb-10 h-[calc(100vh-40px)]   ">
             <div class="w-[85%] mx-auto flex justify-center ">
-                {{-- {{  session()->has('verified') ? 's' : 'ss'  }} --}}
-
-                <Login flash="{{  session()->has('verified') ? 's' : 'ss'  }}"></Login>
+                <div class="bg-gray-100 ">
+                    <h1 class="bg-green-500 text-3xl text-gray-200 p-2">Successfully Created!</h1>
+                    <p class="p-2 text-2xl">Please check your gmail to verifify your accout!</p>
+                </div>
             </div>
         </section>
               {{-- footer --}}
               <footer class="bg-[#121212] p-3 text-center w-full  ">
-                <p class="text-gray-100">2023.Golden Mami.All rights reserved</p>
+                <p class="text-gray-100 ">2023.Golden Mami.All rights reserved</p>
             </footer>
 
 
@@ -99,3 +99,5 @@
         document.title = "Login"
     </script>
 @endsection
+
+

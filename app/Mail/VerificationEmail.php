@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ReservationEmail extends Mailable
+class VerificationEmail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data = [];
@@ -28,6 +28,6 @@ class ReservationEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('goldenmami2023@gmail.com','RESERVATION - Golden Mami House')->subject($this->data['subject'])->view('emails.index')->with('data',$this->data);
+        return $this->from('goldenmami2023@gmail.com','VERIFICATION - Golden Mami House')->subject($this->data['subject'])->view('emails.verify')->with('data',$this->data);
     }
 }

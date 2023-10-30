@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RefundEmail;
 use App\Models\Cart;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Mail\ReservationEmail;
+use App\Models\Refund;
 use App\Models\ReservationOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -22,7 +24,7 @@ class ReservationController extends Controller
             'date'=>'required',
             'order'=>'required',
             'guest'=>'required',
-            'phone_number'=>'required|digits:11|regex:/(0)[09]/|numeric',
+            'phone_number'=>'required|digits:10|numeric',
             'branch'=>'required',
         ]);
 
@@ -124,5 +126,30 @@ class ReservationController extends Controller
         $lists = Reservation::with('order_item','order_items')->where('customer_id',Auth::guard('customer')->user()->id)->orderBy('id','desc')->paginate(6);
 
         return response()->json($lists, 200);
+    }
+
+
+    public function refundStore(Request $request)
+    {
+        $refund = Refund::query()
+                ->create([
+                    'reason'=>$request->reason,
+                    'customer_id'=>Auth::guard('customer')->user()->id
+                ]);
+
+        if(!!$request->receipt)
+        {
+            $filename = time().'-refund.'.$request->receipt->extension();
+
+            $refund->update([
+                'receipt'=>$filename
+            ]);
+            $request->receipt->storeAs('public/refund', $filename);
+        }
+        $data = [
+            'body'=> 'We have received your request. We will check it first, and you can just wait for our response here in the email.',
+            'subject'=>'Golden Mami House Vefication',
+        ];
+        Mail::to(Auth::guard('customer')->user()->email)->send(new RefundEmail($data));
     }
 }

@@ -78,6 +78,9 @@
         <li>
             <a href="/admin/reservation" class="p-2 text-base w-full gap-2 items-center text-gray-800 rounded hover:font-bold hover:opacity-100 tracking-wider flex font-inter {{ request()->is('admin/reservation') ? ' text-gray-700  font-bold' : 'opacity-60'}}"  ><img src="{{asset('svg/reserve.svg')}}" alt=""> Reservation</a>
         </li>
+        <li>
+            <a href="/admin/refund-request" class="p-2 text-base w-full gap-2 items-center text-gray-800 rounded hover:font-bold hover:opacity-100 tracking-wider flex font-inter {{ request()->is('admin/refund-request') ? ' text-gray-700  font-bold' : 'opacity-60'}}"  ><img src="{{asset('svg/reserve.svg')}}" alt=""> Refund Request</a>
+        </li>
 
 
 

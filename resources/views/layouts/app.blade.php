@@ -19,6 +19,11 @@
                 font-family: 'futura','sans';
             }
         </style>
+        <style>
+        #map > .gmnoprint {
+       display:none !important;
+}
+</style>
     </head>
     <body class="scroll-smooth">
         <div id="app">

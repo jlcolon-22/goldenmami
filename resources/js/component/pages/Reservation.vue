@@ -11,16 +11,22 @@
                 <div class="flex flex-col">
                     <label for="">Time</label>
                     <!-- <input type="time" v-model="data.time" class="p-3 bg-gray-200 w-full inline-block" :class="errors.time ? 'border-2 border-red-400' : ''" placeholder="time"> -->
-                    <VueDatePicker input-class-name="date_style" :start-time="startTime" v-model="data.time"  :min-time="{ hours: 10, minutes: 30 }" time-picker  :max-time="{ hours: 21, minutes: 0 }"  placeholder="Select time" ></VueDatePicker>
+                    <VueDatePicker :input-class-name="errors.time ? 'date_style error' : 'date_style'" :start-time="startTime" v-model="data.time"  :min-time="{ hours: 10, minutes: 30 }" time-picker  :max-time="{ hours: 21, minutes: 0 }"  placeholder="Select time" ></VueDatePicker>
+                    <small class="text-base text-red-500" v-if="errors.time">{{ errors.time[0] }}</small>
                 </div>
                 <div class="flex flex-col">
                     <label for="">Date</label>
                     <!-- <input type="date" v-model="data.date" class="p-3 bg-gray-200 w-full inline-block" :class="errors.date ? 'border-2 border-red-400' : ''" placeholder="example@gmail.com"> -->
-                    <VueDatePicker input-class-name="date_style" v-model="data.date"  :min-date="new Date()" date-picker :enable-time-picker="false"  hide-navigation="['time', '']" :disabled-dates="['2023-10-28', '2023-10-30',]" placeholder="Select Date" ></VueDatePicker>
+                    <VueDatePicker  :input-class-name="errors.date ? 'date_style error' : 'date_style'" v-model="data.date"  :min-date="new Date()" date-picker :enable-time-picker="false"  hide-navigation="['time']"  placeholder="Select Date" ></VueDatePicker>
+                    <small class="text-base text-red-500" v-if="errors.date">{{ errors.date[0] }}</small>
                 </div>
-                <div class="flex flex-col">
+                <div class="flex flex-col relative">
                     <label for="">Phone Number</label>
-                    <input type="tel" pattern="^[09]\d{10,10}$" v-model="data.phone_number" class="p-3 bg-gray-200 w-full inline-block" :class="errors.phone_number ? 'border-2 border-red-400' : ''" placeholder="091023213****">
+                    <input type="number" pattern="^[09]\d{10,10}$" v-model="data.phone_number" class="py-3 pr-3 pl-14 bg-gray-200 w-full inline-block" :class="errors.phone_number ? 'border-2 border-red-400' : ''"  placeholder="91023213****">
+                    <div class="bg-gray-300 w-fit p-3 absolute top-6">
+                        +63
+                    </div>
+                    <small class="text-base text-red-500" v-if="errors.phone_number">{{ errors.phone_number[0] }}</small>
                 </div>
 
             </div>
@@ -28,6 +34,7 @@
                 <div class="flex flex-col">
                     <label for="">Guest</label>
                     <input type="number"  v-model="data.guest" class="p-3 bg-gray-200 w-full inline-block" :class="errors.guest ? 'border-2 border-red-400' : ''" placeholder="1">
+                    <small class="text-base text-red-500" v-if="errors.guest">{{ errors.guest[0] }}</small>
                 </div>
                 <div class="flex flex-col">
                     <label for="">Branch</label>
@@ -37,6 +44,7 @@
                         <option value="2">Dagupan</option>
                         <option value="3">Lingayen</option>
                     </select>
+                    <small class="text-base text-red-500" v-if="errors.branch">{{ errors.branch[0] }}</small>
                 </div>
                 <div class="flex flex-col">
                     <label for="">My Order</label>
@@ -44,6 +52,7 @@
                         <option value="">Choose...</option>
                         <option value="1">All in my cart</option>
                     </select>
+                    <small class="text-base text-red-500" v-if="errors.order">{{ errors.order[0] }}</small>
                 </div>
             </div>
             </div>
@@ -151,6 +160,10 @@ onMounted(() => {
 .date_style{
     background-color:rgb(229 231 235) !important;
     color: black !important;
-    padding: 12px 0px 12px 40px !important;
+    padding: 10px 0px 10px 40px !important;
+    border-radius: 0px !important;
+}
+.error{
+    border:1px solid red !important;
 }
 </style>
