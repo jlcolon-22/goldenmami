@@ -13,11 +13,12 @@
                     <!-- <input type="time" v-model="data.time" class="p-3 bg-gray-200 w-full inline-block" :class="errors.time ? 'border-2 border-red-400' : ''" placeholder="time"> -->
                     <VueDatePicker :input-class-name="errors.time ? 'date_style error' : 'date_style'" :start-time="startTime" v-model="data.time"  :min-time="{ hours: 10, minutes: 30 }" time-picker  :max-time="{ hours: 21, minutes: 0 }"  placeholder="Select time" ></VueDatePicker>
                     <small class="text-base text-red-500" v-if="errors.time">{{ errors.time[0] }}</small>
+                    <small class="text-base text-red-500" v-if="!!timeError">{{ timeError }}</small>
                 </div>
                 <div class="flex flex-col">
                     <label for="">Date</label>
                     <!-- <input type="date" v-model="data.date" class="p-3 bg-gray-200 w-full inline-block" :class="errors.date ? 'border-2 border-red-400' : ''" placeholder="example@gmail.com"> -->
-                    <VueDatePicker  :input-class-name="errors.date ? 'date_style error' : 'date_style'" v-model="data.date"  :min-date="new Date()" date-picker :enable-time-picker="false"  hide-navigation="['time']"  placeholder="Select Date" ></VueDatePicker>
+                    <VueDatePicker  :input-class-name="errors.date ? 'date_style error' : 'date_style'" v-model="data.date"  :min-date="new Date()"   :enable-time-picker="false"  hide-navigation="['time']"  placeholder="Select Date" ></VueDatePicker>
                     <small class="text-base text-red-500" v-if="errors.date">{{ errors.date[0] }}</small>
                 </div>
                 <div class="flex flex-col relative">
@@ -112,6 +113,7 @@ import { reactive, ref ,onMounted,watch } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 const errors = ref([]);
+const timeError = ref('');
 const datx = ref('');
 watch(datx,(n,o)=>{
     console.log(n)
@@ -130,15 +132,23 @@ const props = defineProps({auth:String})
 
 const add = async () =>{
     loading.value= true;
+    // console.log(data.time);
+    console.log(data.date);
    try {
     const res = await axios.post('/api/frontend/reservation/payment',data);
     loading.value= false;
     if(res.status == 205)
     {
+        timeError.value = '';
         alert('you need to add to cart menu!')
     }else if(res.status == 207)
     {
+        timeError.value = '';
         alert('Minimum amount of order is 500')
+    }
+    else if(res.status == 233)
+    {
+        timeError.value = `If you want to reserve for today, you should advance your time by ${res.data}.`;
     }
     else{
         window.location.replace(res.data);

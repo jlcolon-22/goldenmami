@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Mail\ReservationEmail;
 use App\Models\Refund;
 use App\Models\ReservationOrder;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Luigel\Paymongo\Facades\Paymongo;
@@ -27,6 +28,25 @@ class ReservationController extends Controller
             'phone_number'=>'required|digits:10|numeric',
             'branch'=>'required',
         ]);
+        if(Carbon::now()->format('Y-m-d') == explode('T',$request->date)[0])
+        {
+
+            if(((int)$request->time['hours'] - (int)Carbon::now()->format('h')) < 0)
+            {
+                return response()->json('2 hours',233);
+            }else
+            {
+
+                if(((int)$request->time['hours'] - (int)Carbon::now()->format('h')) == 1 || ((int)$request->time['hours'] - (int)Carbon::now()->format('h')) == 2)
+                {
+                    return response()->json('2 hours',233);
+                }
+
+            }
+
+        }
+
+
 
         $totals = Cart::with('customer_cart_menu')->where('customer_id',$user->id)->get();
         if(count($totals) == 0)
@@ -45,6 +65,8 @@ class ReservationController extends Controller
         {
             return response()->json(['min amount'], 207);
         }
+
+
         $reserve = Reservation::create([
             'time'=>$request->time['hours'].':'.$request->time['minutes'],
             'date'=>explode('T',$request->date)[0],
