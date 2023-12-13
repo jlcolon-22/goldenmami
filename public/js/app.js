@@ -28121,12 +28121,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context.prev = _context.next) {
             case 0:
               loading.value = true;
-              // console.log(data.time);
-              console.log(data.date);
-              _context.prev = 2;
-              _context.next = 5;
+              _context.prev = 1;
+              _context.next = 4;
               return axios.post('/api/frontend/reservation/payment', data);
-            case 5:
+            case 4:
               res = _context.sent;
               loading.value = false;
               if (res.status == 205) {
@@ -28141,18 +28139,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 window.location.replace(res.data);
               }
               errors.value = [];
-              _context.next = 15;
+              _context.next = 14;
               break;
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](2);
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](1);
               errors.value = _context.t0.response.data.errors;
               loading.value = false;
-            case 15:
+            case 14:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[2, 11]]);
+        }, _callee, null, [[1, 10]]);
       }));
       return function add() {
         return _ref2.apply(this, arguments);

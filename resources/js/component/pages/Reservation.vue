@@ -132,8 +132,7 @@ const props = defineProps({auth:String})
 
 const add = async () =>{
     loading.value= true;
-    // console.log(data.time);
-    console.log(data.date);
+
    try {
     const res = await axios.post('/api/frontend/reservation/payment',data);
     loading.value= false;
