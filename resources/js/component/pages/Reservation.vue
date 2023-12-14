@@ -18,7 +18,7 @@
                 <div class="flex flex-col">
                     <label for="">Date</label>
                     <!-- <input type="date" v-model="data.date" class="p-3 bg-gray-200 w-full inline-block" :class="errors.date ? 'border-2 border-red-400' : ''" placeholder="example@gmail.com"> -->
-                    <VueDatePicker  :input-class-name="errors.date ? 'date_style error' : 'date_style'" v-model="data.date"  :min-date="new Date()"   :enable-time-picker="false"  hide-navigation="['time']"  placeholder="Select Date" ></VueDatePicker>
+                    <VueDatePicker   :input-class-name="errors.date ? 'date_style error' : 'date_style'" v-model="date"  :min-date="new Date()"   timezone="Asia/Manila" :enable-time-picker="false"  hide-navigation="['time']"  placeholder="Select Date"  ></VueDatePicker>
                     <small class="text-base text-red-500" v-if="errors.date">{{ errors.date[0] }}</small>
                 </div>
                 <div class="flex flex-col relative">
@@ -57,45 +57,7 @@
                 </div>
             </div>
             </div>
-            <!-- <div class="grid grid-cols-2 gap-10 p-3">
-                <div class="flex flex-col">
-                    <label for="">Time</label>
-                    <input type="time" v-model="data.time" class="p-3 bg-gray-200" :class="errors.time ? 'border-2 border-red-400' : ''" placeholder="time">
-                </div>
-                <div class="flex flex-col">
-                    <label for="">Date</label>
-                    <input type="date" v-model="data.date" class="p-3 bg-gray-200" :class="errors.date ? 'border-2 border-red-400' : ''" placeholder="example@gmail.com">
-                </div>
-            </div> -->
-            <!-- <div class="grid grid-cols-2 gap-10 p-3">
-                <div class="flex flex-col">
-                    <label for="">Phone Number</label>
-                    <input type="tel" v-model="data.phone_number" class="p-3 bg-gray-200" :class="errors.phone_number ? 'border-2 border-red-400' : ''" placeholder="091023213****">
-                </div>
-                <div class="flex flex-col">
-                    <label for="">Guest</label>
-                    <input type="number" v-model="data.guest" class="p-3 bg-gray-200" :class="errors.guest ? 'border-2 border-red-400' : ''" placeholder="1">
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-10 p-3">
-                <div class="flex flex-col">
-                    <label for="">Branch</label>
-                    <select v-model="data.branch"  class="p-3 bg-gray-200" :class="errors.branch ? 'border-2 border-red-400' : ''">
-                        <option value="">Choose...</option>
-                        <option value="1">Calasioa</option>
-                        <option value="2">Dagupan</option>
-                        <option value="3">Lingayen</option>
-                    </select>
-                </div>
-                <div class="flex flex-col">
-                    <label for="">My Order</label>
-                    <select v-model="data.order" class="p-3 bg-gray-200" :class="errors.order ? 'border-2 border-red-400' : ''">
-                        <option value="">Choose...</option>
-                        <option value="1">All in my cart</option>
-                    </select>
-                </div>
-            </div>
-             -->
+
              <div class="grid grid-cols-1 gap-10 p-3">
                 <a v-if="props.auth == '0'" href="/login"  class="bg-[#ebb700] p-3 text-gray-200 font-sans text-center font-semibold">Make a Reservation</a>
                 <div v-else  class="w-full">
@@ -109,15 +71,17 @@
 
 </template>
 <script setup>
-import { reactive, ref ,onMounted,watch } from 'vue';
+import { reactive, ref ,onMounted,watch,computed } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import moment from 'moment';
 const errors = ref([]);
 const timeError = ref('');
 const datx = ref('');
 watch(datx,(n,o)=>{
-    console.log(n)
+
 })
+
 const startTime = ref({ hours: 10, minutes: 30 });
 const data = reactive({
     time:'',
@@ -127,9 +91,20 @@ const data = reactive({
     branch:'',
     order:''
 });
+const date = ref('');
+watch(date, (n,o) =>{
+    const formattedDate = moment(n).format('YYYY-MM-DD');
+    data.date = formattedDate;
+    console.log(formattedDate)
+})
 const loading = ref(false);
 const props = defineProps({auth:String})
-
+const allowedDates = computed(() => {
+  return [
+    new Date(),
+    new Date(new Date().setDate(new Date().getDate() + 1))
+  ];
+});
 const add = async () =>{
     loading.value= true;
 

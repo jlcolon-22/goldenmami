@@ -28,7 +28,8 @@ class ReservationController extends Controller
             'phone_number'=>'required|digits:10|numeric',
             'branch'=>'required',
         ]);
-        if(Carbon::now()->format('Y-m-d') == explode('T',$request->date)[0])
+
+        if(Carbon::now()->format('Y-m-d') == $request->date)
         {
 
             if(((int)$request->time['hours'] - (int)Carbon::now()->format('h')) < 0)
@@ -69,7 +70,7 @@ class ReservationController extends Controller
 
         $reserve = Reservation::create([
             'time'=>$request->time['hours'].':'.$request->time['minutes'],
-            'date'=>explode('T',$request->date)[0],
+            'date'=>$request->date,
             'number'=>$request->phone_number,
             'guest'=>$request->guest,
             'branch'=>$request->branch,
