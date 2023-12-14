@@ -293,7 +293,7 @@
 
                         <th scope="col" class="px-6 py-3 font-inter">DATE</th>
 
-                        <th scope="col" class="px-6 py-3 font-inter">RECEIPT</th>
+                        <th scope="col" class="px-6 py-3 font-inter">RECEIVE</th>
                         <th scope="col" class="px-6 py-3 font-inter">REASON</th>
                         <th scope="col" class="px-6 py-3 font-inter">STATUS</th>
 

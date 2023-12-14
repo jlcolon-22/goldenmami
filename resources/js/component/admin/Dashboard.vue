@@ -1,27 +1,27 @@
 <template>
     <div class=" min-w-[96%] p-10">
-        <div class="grid grid-cols-3 gap-10 mb-10">
-            <div class="shadow rounded py-3 px-6 flex bg-[#fff] justify-between">
+        <div class="grid grid-cols-2 gap-10 mb-10">
+            <!-- <a href="/admin/customers" class="shadow rounded py-3 px-6 flex bg-[#fff] justify-between">
                <div>
                 <small class="font-inter text-xs opacity-70">Total Employee</small>
                 <h1 class="text-2xl font-bold font-inter">{{ datas['employees'] }}</h1>
                </div>
                <img src="/svg/employeesColor.svg" alt="">
-            </div>
-            <div class="shadow rounded py-3 px-6 flex bg-[#fff] justify-between">
+            </a> -->
+            <a href="/admin/customers" class="shadow rounded py-3 px-6 flex bg-[#fff] justify-between">
                <div>
                 <small class="font-inter text-xs opacity-70">Total Customer</small>
                 <h1 class="text-2xl font-bold font-inter">{{ datas['customers'] }}</h1>
                </div>
                <img src="/svg/customers.svg" alt="">
-            </div>
-            <div class="shadow rounded py-3 px-6 flex bg-[#fff] justify-between">
+            </a>
+            <a href="/admin/reservation" class="shadow rounded py-3 px-6 flex bg-[#fff] justify-between">
                <div>
                 <small class="font-inter text-xs opacity-70">New Reservation</small>
                 <h1 class="text-2xl font-bold font-inter">{{ datas['reservations'] }}</h1>
                </div>
                <img src="/svg/reserve.svg" alt="">
-            </div>
+            </a>
         </div>
         <canvas id="myChart" style="max-width: 98%;"></canvas>
     </div>

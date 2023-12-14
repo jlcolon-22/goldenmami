@@ -41,7 +41,7 @@
                     <label for="">Branch</label>
                     <select v-model="data.branch"  class="p-3 bg-gray-200 w-full inline-block" :class="errors.branch ? 'border-2 border-red-400' : ''">
                         <option value="">Choose...</option>
-                        <option value="1">calasiao</option>
+                        <option value="1">Calasiao</option>
                         <option value="2">Dagupan</option>
                         <option value="3">Lingayen</option>
                     </select>
